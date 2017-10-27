@@ -1,0 +1,20 @@
+from PIL import Image
+import pytesseract
+from gtts import gTTS
+#code to find tesseract exe for python
+pytesseract.pytesseract.tesseract_cmd = 'C:/Program Files (x86)/Tesseract-OCR/tesseract'
+tessdata_dir_config = '--tessdata-dir "C:\Program Files (x86)\Tesseract-OCR\tesseract"'
+
+#function to convert text to mp3
+def makemp3(words, mp3name):
+    tts = gTTS(text=words,lang='en-uk')
+    tts.save("%s.mp3" %mp3name)
+    print("File %s.mp3 created" % mp3name)
+
+im = Image.open("sample1.jpg")
+
+data = pytesseract.image_to_string(im, lang = 'eng')
+
+print(data)
+
+makemp3(data, "testmp3")
